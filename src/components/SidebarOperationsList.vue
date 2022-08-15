@@ -38,3 +38,12 @@ export default {
   name: "SidebarOperationsList"
 }
 </script>
+
+<style>
+.operations-list {
+  font-size: .8rem;
+}
+.operations-list  .media-aside {
+  margin-right: .5em !important;
+}
+</style>
