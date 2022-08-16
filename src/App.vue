@@ -45,9 +45,4 @@ export default {
 };
 </script>
 
-<style>
-html,
-body {
-	font-size: 0.875rem;
-}
-</style>
+<style></style>
