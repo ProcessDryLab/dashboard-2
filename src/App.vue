@@ -1,14 +1,13 @@
 <template>
-  <div id="app">
-    <Navbar />
-    <SidebarHosts />
+	<div id="app">
+		<Navbar />
+		<SidebarHosts />
 
-    <b-container fluid>
-      <b-row>
-          <SidebarWrapper />
+		<b-container fluid>
+			<b-row>
+				<SidebarWrapper />
 
-
-          <!-- <main class="col col-md-9 ml-sm-auto col-lg-10 px-md-4" style="background-color: yellow">
+				<!-- <main class="col col-md-9 ml-sm-auto col-lg-10 px-md-4" style="background-color: yellow">
           !-- <b-col class="" style="background-color: yellow"> --
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
@@ -26,30 +25,29 @@
 
           !-- </b-col> --
           </main> -->
-      </b-row>
-    </b-container>
-  
-  </div>
+			</b-row>
+		</b-container>
+	</div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import SidebarHosts from './components/SidebarHosts.vue'
-import SidebarWrapper from './components/SidebarWrapper.vue'
+import Navbar from "./components/Navbar.vue";
+import SidebarHosts from "./components/SidebarHosts.vue";
+import SidebarWrapper from "./components/SidebarWrapper.vue";
 
 export default {
-  name: "App",
-  components: {
-    Navbar,
-    SidebarHosts,
-    SidebarWrapper
-  }
-}
+	name: "App",
+	components: {
+		Navbar,
+		SidebarHosts,
+		SidebarWrapper,
+	},
+};
 </script>
 
-
 <style>
-html,body {
-  font-size: .875rem;
+html,
+body {
+	font-size: 0.875rem;
 }
 </style>
