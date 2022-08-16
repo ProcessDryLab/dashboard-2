@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/dashboard-2/'
+	publicPath: "/dashboard-2/",
 };
