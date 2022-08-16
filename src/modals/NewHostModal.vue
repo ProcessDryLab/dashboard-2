@@ -29,16 +29,14 @@ export default {
 	components: {
 		ValidatedInputText,
 	},
-	data() {
-		return {
-			hostname: "",
-			type: "miner",
-			types: [
-				{ value: "miner", text: "Miner host" },
-				{ value: "repository", text: "Repository host" },
-			],
-		};
-	},
+	data: () => ({
+		hostname: "",
+		type: "miner",
+		types: [
+			{ value: "miner", text: "Miner host" },
+			{ value: "repository", text: "Repository host" },
+		],
+	}),
 	validations: {
 		hostname: {
 			required,
@@ -55,7 +53,7 @@ export default {
 			if (this.$v.$anyError) {
 				return;
 			}
-			// this.$emit("add-miner", { host: this.minerHost });
+			this.$store.commit("addHost", { type: this.type, host: this.hostname });
 			this.$nextTick(() => {
 				this.$bvModal.hide("new-host-modal");
 			});

@@ -3,17 +3,20 @@
 		<div class="px-3 py-2">
 			<h5 class="mb-3">Repositories</h5>
 			<b-list-group>
-				<b-list-group-item class="pl-3 online">
+				<b-list-group-item
+					v-for="item in hostsRepository"
+					v-bind:key="item.name"
+					class="pl-3"
+					:class="item.status"
+				>
 					<b-icon icon="hdd-fill" />
-					<code class="text-dark ml-2">repo1.pdl.com</code>
-					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
-						<b-icon icon="trash" />
-					</b-button>
-				</b-list-group-item>
-				<b-list-group-item class="pl-3 offline">
-					<b-icon icon="hdd-fill" />
-					<code class="text-dark ml-2">repo2.pdl.com</code>
-					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+					<code class="text-dark ml-2">{{ item.name }}</code>
+					<b-button
+						variant="link"
+						class="float-right p-0 text-secondary"
+						style="font-size: 0.75em"
+						@click="deleteEntry({ type: 'repository', name: item.name })"
+					>
 						<b-icon icon="trash" />
 					</b-button>
 				</b-list-group-item>
@@ -21,17 +24,15 @@
 
 			<h5 class="mt-4 mb-3">Miners</h5>
 			<b-list-group>
-				<b-list-group-item class="pl-3 loading">
+				<b-list-group-item v-for="item in hostsMiner" v-bind:key="item.name" class="pl-3" :class="item.status">
 					<b-icon icon="gear-fill" />
-					<code class="text-dark ml-2">miner2.pdl.com</code>
-					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
-						<b-icon icon="trash" />
-					</b-button>
-				</b-list-group-item>
-				<b-list-group-item class="pl-3 online">
-					<b-icon icon="gear-fill" />
-					<code class="text-dark ml-2">miner3.pdl.com</code>
-					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+					<code class="text-dark ml-2">{{ item.name }}</code>
+					<b-button
+						variant="link"
+						class="float-right p-0 text-secondary"
+						style="font-size: 0.75em"
+						@click="deleteEntry({ type: 'miner', name: item.name })"
+					>
 						<b-icon icon="trash" />
 					</b-button>
 				</b-list-group-item>
@@ -54,15 +55,27 @@ export default {
 	components: {
 		NewHostModal,
 	},
+	data: () => ({
+		hostsMiner: [],
+		hostsRepository: [],
+	}),
+	mounted() {
+		this.hostsMiner = this.$store.getters.getHostsMiner;
+		this.hostsRepository = this.$store.getters.getHostsRepository;
+	},
+	methods: {
+		deleteEntry(e) {
+			this.$store.commit("removeHost", e);
+		},
+	},
 };
 </script>
 
-<style>
+<style scoped>
 .online > svg {
 	color: #28a745;
 }
 .loading > svg {
-	/* color: #bf920d; */
 	color: #cc9a06;
 	animation: 0.75s infinite ease-in-out alternate b-icon-animation-fade;
 }
