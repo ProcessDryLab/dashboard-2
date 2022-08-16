@@ -1,7 +1,7 @@
 <template>
 	<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse px-0 border-right">
 		<div class="sidebar-sticky px-0 mx-0">
-			<div style="height: calc(100vh - 80px)">
+			<div style="height: calc(100vh - 86px)">
 				<div class="h-75 overflow-auto pb-1">
 					<b-nav class="flex-column">
 						<b-button variant="outline-secondary" class="mt-3 mx-2">
@@ -48,7 +48,7 @@ export default {
 	bottom: 0;
 	left: 0;
 	z-index: 100; /* Behind the navbar */
-	padding: 48px 0 0; /* Height of navbar */
+	padding: 56px 0 0; /* Height of navbar */
 }
 
 @media (max-width: 767.98px) {
@@ -60,7 +60,7 @@ export default {
 .sidebar-sticky {
 	position: relative;
 	top: 0;
-	height: calc(100vh - 48px);
+	height: calc(100vh - 56px);
 	overflow-x: hidden;
 	overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }

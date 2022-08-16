@@ -1,26 +1,39 @@
 <template>
-	<b-sidebar id="sidebar-1" title="Hosts configuration" shadow backdrop>
+	<b-sidebar id="sidebar-1" title="Hosts configuration" shadow backdrop visible>
 		<div class="px-3 py-2">
 			<h5 class="mb-3">Repositories</h5>
 			<b-list-group>
-				<b-list-group-item class="pl-3">
-					<b-icon icon="hdd-fill" style="color: #28a745" /> <tt>repository1.pdl.com</tt>
+				<b-list-group-item class="pl-3 online">
+					<b-icon icon="hdd-fill" />
+					<code class="text-dark ml-2">repo1.pdl.com</code>
+					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+						<b-icon icon="trash" />
+					</b-button>
 				</b-list-group-item>
-				<b-list-group-item class="pl-3">
-					<b-icon icon="hdd-fill" animation="fade" style="color: #bf920d" /> <tt>repository2.pdl.com</tt>
+				<b-list-group-item class="pl-3 offline">
+					<b-icon icon="hdd-fill" />
+					<code class="text-dark ml-2">repo2.pdl.com</code>
+					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+						<b-icon icon="trash" />
+					</b-button>
 				</b-list-group-item>
 			</b-list-group>
 
 			<h5 class="mt-4 mb-3">Miners</h5>
 			<b-list-group>
-				<b-list-group-item class="pl-3">
-					<b-icon icon="gear-fill" style="color: #28a745" /> <tt>miner1.pdl.com</tt>
+				<b-list-group-item class="pl-3 loading">
+					<b-icon icon="gear-fill" />
+					<code class="text-dark ml-2">miner2.pdl.com</code>
+					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+						<b-icon icon="trash" />
+					</b-button>
 				</b-list-group-item>
-				<b-list-group-item class="pl-3">
-					<b-icon icon="gear-fill" animation="fade" style="color: #bf920d" /> <tt>miner2.pdl.com</tt>
-				</b-list-group-item>
-				<b-list-group-item class="pl-3">
-					<b-icon icon="gear-fill" style="color: #28a745" /> <tt>miner3.pdl.com</tt>
+				<b-list-group-item class="pl-3 online">
+					<b-icon icon="gear-fill" />
+					<code class="text-dark ml-2">miner3.pdl.com</code>
+					<b-button variant="link" class="float-right p-0 text-secondary" style="font-size: 0.75em">
+						<b-icon icon="trash" />
+					</b-button>
 				</b-list-group-item>
 			</b-list-group>
 
@@ -43,3 +56,20 @@ export default {
 	},
 };
 </script>
+
+<style>
+.online > svg {
+	color: #28a745;
+}
+.loading > svg {
+	/* color: #bf920d; */
+	color: #cc9a06;
+	animation: 0.75s infinite ease-in-out alternate b-icon-animation-fade;
+}
+.offline > svg {
+	color: #b02a37;
+}
+.offline code {
+	text-decoration: line-through;
+}
+</style>
