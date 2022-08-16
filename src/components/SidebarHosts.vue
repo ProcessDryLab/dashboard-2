@@ -25,15 +25,21 @@
 			</b-list-group>
 
 			<div class="btn-group fixed-bottom px-3 py-2" role="group">
-				<button type="button" class="btn btn-primary"><b-icon icon="hdd-fill" /> Add repository</button>
-				<button type="button" class="btn btn-primary"><b-icon icon="gear-fill" /> Add miner</button>
+				<button type="button" class="btn btn-primary" v-b-modal.new-host-modal>Add new host</button>
 			</div>
 		</div>
+
+		<NewHostModal />
 	</b-sidebar>
 </template>
 
 <script>
+import NewHostModal from "../modals/NewHostModal.vue";
+
 export default {
 	name: "SidebarHosts",
+	components: {
+		NewHostModal,
+	},
 };
 </script>
