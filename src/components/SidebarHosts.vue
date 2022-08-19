@@ -4,7 +4,7 @@
 			<h5 class="mb-3">Repositories</h5>
 			<b-list-group>
 				<b-list-group-item
-					v-for="item in hostsRepository"
+					v-for="item in this.$store.getters.getHostsRepository"
 					v-bind:key="item.name"
 					class="pl-3"
 					:class="item.status"
@@ -24,7 +24,12 @@
 
 			<h5 class="mt-4 mb-3">Miners</h5>
 			<b-list-group>
-				<b-list-group-item v-for="item in hostsMiner" v-bind:key="item.name" class="pl-3" :class="item.status">
+				<b-list-group-item
+					v-for="item in this.$store.getters.getHostsMiner"
+					v-bind:key="item.name"
+					class="pl-3"
+					:class="item.status"
+				>
 					<b-icon icon="gear-fill" />
 					<code class="text-dark ml-2">{{ item.name }}</code>
 					<b-button
@@ -54,14 +59,6 @@ export default {
 	name: "SidebarHosts",
 	components: {
 		NewHostModal,
-	},
-	data: () => ({
-		hostsMiner: [],
-		hostsRepository: [],
-	}),
-	mounted() {
-		this.hostsMiner = this.$store.getters.getHostsMiner;
-		this.hostsRepository = this.$store.getters.getHostsRepository;
 	},
 	methods: {
 		deleteEntry(e) {
