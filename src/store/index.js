@@ -15,6 +15,23 @@ export default new Vuex.Store({
 				{ name: "http://miner.test2.com", status: "loading" },
 			],
 		},
+		workspace: [
+			{
+				id: "12f3f277-e6e2-488d-884d-9cfb0d124286",
+				name: "Log file 1",
+				type: "XES",
+			},
+			{
+				id: "12f3f277-e6e2-488d-884d-9cfb0d124287",
+				name: "Log file 2",
+				type: "DCR",
+			},
+			{
+				id: "12f3f277-e6e2-488d-884d-9cfb0d124288",
+				name: "Log file 3",
+				type: "PetriNet",
+			},
+		],
 	},
 	mutations: {
 		// synchronous
@@ -42,5 +59,6 @@ export default new Vuex.Store({
 	getters: {
 		getHostsMiner: (state) => state.hosts.miners,
 		getHostsRepository: (state) => state.hosts.repositories,
+		getWorkspace: (state) => state.workspace,
 	},
 });
