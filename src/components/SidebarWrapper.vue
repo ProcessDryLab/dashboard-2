@@ -4,10 +4,19 @@
 			<div style="height: calc(100vh - 86px)">
 				<div class="h-75 overflow-auto pb-1">
 					<b-nav class="flex-column">
-						<b-button variant="outline-secondary" class="mt-3 mx-2">
+						<b-button
+							variant="outline-secondary"
+							class="mt-3 mx-2"
+							v-b-modal.new-file-modal
+							:disabled="this.$store.getters.getSystemStatus != 'online'"
+						>
 							<b-icon icon="cloud-upload" /> Upload file
 						</b-button>
-						<b-button variant="outline-secondary" class="mt-1 mx-2">
+						<b-button
+							variant="outline-secondary"
+							class="mt-1 mx-2"
+							:disabled="this.$store.getters.getSystemStatus != 'online'"
+						>
 							<b-icon icon="gear-wide-connected" /> New mining instance
 						</b-button>
 					</b-nav>
@@ -19,6 +28,7 @@
 			</div>
 			<SidebarStatusSummary />
 		</div>
+		<FileUploadModal />
 	</nav>
 </template>
 
@@ -26,6 +36,7 @@
 import SidebarResourcesList from "./SidebarResourcesList.vue";
 import SidebarOperationsList from "./SidebarOperationsList.vue";
 import SidebarStatusSummary from "./SidebarStatusSummary.vue";
+import FileUploadModal from "../modals/FileUploadModal.vue";
 
 export default {
 	name: "SidebarWrapper",
@@ -33,6 +44,7 @@ export default {
 		SidebarResourcesList,
 		SidebarOperationsList,
 		SidebarStatusSummary,
+		FileUploadModal,
 	},
 };
 </script>
