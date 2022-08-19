@@ -42,6 +42,9 @@ export default {
 		SidebarHosts,
 		SidebarWrapper,
 	},
+	mounted() {
+		this.$store.dispatch("checkHosts");
+	},
 };
 </script>
 

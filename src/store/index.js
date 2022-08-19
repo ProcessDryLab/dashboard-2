@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+import { RepositoryService } from "../services/repository";
 
 Vue.use(Vuex);
 
@@ -7,34 +9,15 @@ export default new Vuex.Store({
 	state: {
 		hosts: {
 			repositories: [
-				{ name: "http://repo.test1.com", status: "offline" },
-				{ name: "http://repo.test2.com", status: "online" },
+				{ name: "http://pdl-repository-eu1.herokuapp.com", status: "loading" },
+				{ name: "http://pdl-repository-eu2.herokuapp.com", status: "loading" },
 			],
 			miners: [
 				{ name: "http://miner.test1.com", status: "online" },
-				{ name: "http://miner.test2.com", status: "loading" },
+				{ name: "http://miner.test2.com", status: "online" },
 			],
 		},
-		workspace: [
-			{
-				id: "12f3f277-e6e2-488d-884d-9cfb0d124286",
-				name: "Log file 1",
-				type: "XES",
-				repository: "http://repo.test1.com",
-			},
-			{
-				id: "12f3f277-e6e2-488d-884d-9cfb0d124287",
-				name: "Log file 2",
-				type: "DCR",
-				repository: "http://repo.test1.com",
-			},
-			{
-				id: "12f3f277-e6e2-488d-884d-9cfb0d124288",
-				name: "Log file 3",
-				type: "PetriNet",
-				repository: "http://repo.test1.com",
-			},
-		],
+		workspace: [],
 	},
 	mutations: {
 		// synchronous
@@ -60,6 +43,35 @@ export default new Vuex.Store({
 	},
 	actions: {
 		// asynchronous
+		async checkIndividualHosts({ state }) {
+			for (const h of state.hosts.miners) {
+				axios
+					.get(RepositoryService.buildPingUrl(h.name))
+					.then((res) =>
+						Vue.set(h, "status", (this.systemStatus = res.data === "pong" ? "online" : "offline"))
+					)
+					.catch(() => {
+						Vue.set(h, "status", "offline");
+					});
+			}
+			for (const h of state.hosts.repositories) {
+				axios
+					.get(RepositoryService.buildPingUrl(h.name))
+					.then((res) =>
+						Vue.set(h, "status", (this.systemStatus = res.data === "pong" ? "online" : "offline"))
+					)
+					.catch(() => {
+						Vue.set(h, "status", "offline");
+					});
+			}
+		},
+
+		async checkHosts({ dispatch }) {
+			dispatch("checkIndividualHosts");
+			setInterval(() => {
+				dispatch("checkIndividualHosts");
+			}, 1000 * 5);
+		},
 	},
 	modules: {},
 	getters: {
