@@ -20,16 +20,19 @@ export default new Vuex.Store({
 				id: "12f3f277-e6e2-488d-884d-9cfb0d124286",
 				name: "Log file 1",
 				type: "XES",
+				repository: "http://repo.test1.com",
 			},
 			{
 				id: "12f3f277-e6e2-488d-884d-9cfb0d124287",
 				name: "Log file 2",
 				type: "DCR",
+				repository: "http://repo.test1.com",
 			},
 			{
 				id: "12f3f277-e6e2-488d-884d-9cfb0d124288",
 				name: "Log file 3",
 				type: "PetriNet",
+				repository: "http://repo.test1.com",
 			},
 		],
 	},
@@ -51,6 +54,9 @@ export default new Vuex.Store({
 				state.hosts.miners.splice(index, 1);
 			}
 		},
+		addResource(state, payload) {
+			state.workspace.push(payload);
+		},
 	},
 	actions: {
 		// asynchronous
@@ -60,5 +66,18 @@ export default new Vuex.Store({
 		getHostsMiner: (state) => state.hosts.miners,
 		getHostsRepository: (state) => state.hosts.repositories,
 		getWorkspace: (state) => state.workspace,
+		getSystemStatus(state) {
+			var status = "online";
+			for (const item of state.hosts.miners.concat(state.hosts.repositories)) {
+				if (item.status === "offline") {
+					status = "offline";
+					break;
+				}
+				if (item.status === "loading") {
+					status = "loading";
+				}
+			}
+			return status;
+		},
 	},
 });

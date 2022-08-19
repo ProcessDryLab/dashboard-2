@@ -1,6 +1,6 @@
 <template>
 	<div class="pl-3 pt-1 pb-1 small bg-light border-top" style="height: 30px">
-		<b-icon icon="circle-fill" :class="this.status" /> {{ message }}
+		<b-icon icon="circle-fill" :class="this.$store.getters.getSystemStatus" /> {{ message }}
 	</div>
 </template>
 
@@ -8,21 +8,8 @@
 export default {
 	name: "SidebarStatusSummary",
 	computed: {
-		status() {
-			var status = "online";
-			for (const item of this.$store.getters.getHostsMiner.concat(this.$store.getters.getHostsRepository)) {
-				if (item.status === "offline") {
-					status = "offline";
-					break;
-				}
-				if (item.status === "loading") {
-					status = "loading";
-				}
-			}
-			return status;
-		},
 		message() {
-			const status = this.status;
+			const status = this.$store.getters.getSystemStatus;
 			var msg = "All systems are online";
 			if (status === "offline") msg = "Some systems are offline";
 			if (status === "loading") msg = "Some systems are loading";
