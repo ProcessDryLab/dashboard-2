@@ -7,35 +7,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		hosts: {
-			repositories: [
-				{ name: "http://pdl-repository-eu1.herokuapp.com", status: "loading" },
-				{ name: "http://pdl-repository-eu2.herokuapp.com", status: "loading" },
-			],
-			miners: [
-				{ name: "http://miner.test1.com", status: "online" },
-				{ name: "http://miner.test2.com", status: "online" },
-			],
-		},
+		hosts: [
+			{ name: "http://pdl-repository-eu1.herokuapp.com", status: "loading", type: "repository" },
+			{ name: "http://pdl-repository-eu2.herokuapp.com", status: "loading", type: "repository" },
+			{ name: "http://miner.test1.com", status: "online", type: "miner" },
+			{ name: "http://miner.test2.com", status: "online", type: "miner" },
+		],
 		workspace: [],
 	},
 	mutations: {
 		// synchronous
 		addHost(state, payload) {
-			if (payload.type === "repository") {
-				state.hosts.repositories.push({ name: payload.host, status: "loading" });
-			} else if (payload.type === "miner") {
-				state.hosts.miners.push({ name: payload.host, status: "loading" });
-			}
+			state.hosts.push({ name: payload.host, status: "loading", type: payload.type });
 		},
 		removeHost(state, payload) {
-			if (payload.type === "repository") {
-				const index = state.hosts.repositories.map((e) => e.name).indexOf(payload.name);
-				state.hosts.repositories.splice(index, 1);
-			} else if (payload.type === "miner") {
-				const index = state.hosts.miners.map((e) => e.name).indexOf(payload.name);
-				state.hosts.miners.splice(index, 1);
-			}
+			state.hosts.forEach(function (value, i) {
+				if (value.type == payload.type && value.name == payload.name) {
+					state.hosts.splice(i, 1);
+				}
+			});
 		},
 		addResource(state, payload) {
 			state.workspace.push(payload);
@@ -44,17 +34,7 @@ export default new Vuex.Store({
 	actions: {
 		// asynchronous
 		async checkIndividualHosts({ state }) {
-			for (const h of state.hosts.miners) {
-				axios
-					.get(RepositoryService.buildPingUrl(h.name))
-					.then((res) =>
-						Vue.set(h, "status", (this.systemStatus = res.data === "pong" ? "online" : "offline"))
-					)
-					.catch(() => {
-						Vue.set(h, "status", "offline");
-					});
-			}
-			for (const h of state.hosts.repositories) {
+			for (const h of state.hosts) {
 				axios
 					.get(RepositoryService.buildPingUrl(h.name))
 					.then((res) =>
@@ -75,12 +55,12 @@ export default new Vuex.Store({
 	},
 	modules: {},
 	getters: {
-		getHostsMiner: (state) => state.hosts.miners,
-		getHostsRepository: (state) => state.hosts.repositories,
+		getHostsMiner: (state) => state.hosts.filter((h) => h.type === "miner"),
+		getHostsRepository: (state) => state.hosts.filter((h) => h.type === "repository"),
 		getWorkspace: (state) => state.workspace,
 		getSystemStatus(state) {
 			var status = "online";
-			for (const item of state.hosts.miners.concat(state.hosts.repositories)) {
+			for (const item of state.hosts) {
 				if (item.status === "offline") {
 					status = "offline";
 					break;
