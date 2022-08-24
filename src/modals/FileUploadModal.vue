@@ -3,11 +3,7 @@
 		<form ref="form" @submit.stop.prevent="handleSubmit">
 			<ValidatedInputText label="File:" error="Upload a file" type="file" v-model="file" />
 			<b-form-group label="Repository:">
-				<b-form-select
-					v-model="repository"
-					:options="this.$store.getters.getHostsRepository.map((str) => ({ text: str }))"
-					required
-				></b-form-select>
+				<b-form-select v-model="repository" :options="repositories" required></b-form-select>
 			</b-form-group>
 		</form>
 	</b-modal>
@@ -24,7 +20,13 @@ export default {
 	data: () => ({
 		file: "",
 		repository: "",
+		repositories: [],
 	}),
+	mounted() {
+		console.log(this.$store.getters.getHostsRepository[0].name);
+		this.repositories = this.$store.getters.getHostsRepository.map((str) => ({ text: str.name, value: str.name }));
+		this.repository = this.repositories[0].value;
+	},
 	methods: {
 		handleSubmit() {
 			this.$v.$touch();

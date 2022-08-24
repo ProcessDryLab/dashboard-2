@@ -1,8 +1,8 @@
 export default {
 	state: {
 		workspace: [
-			// { id: "aaaa1", name: "f1", type: "t1" },
-			// { id: "aaaa2", name: "f2", type: "t2" },
+			{ id: "aaaa1", name: "f1", type: "t1" },
+			{ id: "aaaa2", name: "f2", type: "t2" },
 		],
 	},
 	mutations: {
