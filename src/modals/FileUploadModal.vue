@@ -48,6 +48,7 @@ export default {
 				axios.post(RepositoryService.buildUploadUrl(this.repository), payload, config).then(() => {
 					this.$bvToast.toast('Upload of file "' + this.file.name + '" complete', {
 						title: "Upload",
+						variant: "success",
 						solid: true,
 					});
 				});
