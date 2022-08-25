@@ -8,7 +8,6 @@
 					:state="Boolean(file)"
 					placeholder="Choose a file or drop it here..."
 					drop-placeholder="Drop file here..."
-					@change="onChangeFileUpload()"
 				></b-form-file>
 			</b-form-group>
 			<b-form-group label="Repository:">
