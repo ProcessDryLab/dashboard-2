@@ -35,16 +35,25 @@ export default {
 	},
 	methods: {
 		handleSubmit() {
-			console.log(this.file);
-			const config = { headers: { "Content-Type": "multipart/form-data" } };
-			const payload = new FormData();
-			payload.append("upfile", this.file, config);
-			axios.post(RepositoryService.buildUploadUrl(this.repository), payload).then(() => {
-				console.log("uploaded");
-			});
+			if (this.file === null) {
+				this.$bvToast.toast("No file specified", {
+					title: "Upload",
+					solid: true,
+					variant: "danger",
+				});
+			} else {
+				const config = { headers: { "Content-Type": "multipart/form-data" } };
+				const payload = new FormData();
+				payload.append("upfile", this.file);
+				axios.post(RepositoryService.buildUploadUrl(this.repository), payload, config).then(() => {
+					this.$bvToast.toast('Upload of file "' + this.file.name + '" complete', {
+						title: "Upload",
+						solid: true,
+					});
+				});
+			}
 		},
-		handleOk(bvModalEvt) {
-			bvModalEvt.preventDefault();
+		handleOk() {
 			this.handleSubmit();
 		},
 	},
