@@ -1,9 +1,13 @@
 export class RepositoryService {
-	static buildPingUrl(url) {
-		return url + "/api/v1/system/ping";
+	static buildPingUrl(hostname) {
+		return hostname + "/api/v1/system/ping";
 	}
 
-	static buildUploadUrl(url) {
-		return url + "/api/v1/resources";
+	static buildUploadUrl(hostname) {
+		return hostname + "/api/v1/resources";
+	}
+
+	static buildResourceListUrl(hostname) {
+		return hostname + "/api/v1/resources";
 	}
 }

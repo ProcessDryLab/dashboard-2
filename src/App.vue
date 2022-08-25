@@ -44,6 +44,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("checkHosts");
+		this.$store.dispatch("checkWorkspaces");
 	},
 };
 </script>

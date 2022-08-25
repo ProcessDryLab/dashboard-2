@@ -6,7 +6,7 @@
 		<b-nav class="flex-column">
 			<b-nav-item href="#" v-for="resource in this.$store.getters.getWorkspace" v-bind:key="resource.id">
 				<b-icon icon="file-text" class="feather" /> {{ resource.name }}
-				<b-badge variant="secondary" style="float: right">{{ resource.type }}</b-badge>
+				<b-badge variant="secondary" style="float: right">{{ resource.type.name }}</b-badge>
 			</b-nav-item>
 		</b-nav>
 	</div>
