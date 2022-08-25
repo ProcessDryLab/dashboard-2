@@ -62,7 +62,7 @@ export default {
 	},
 	methods: {
 		deleteEntry(e) {
-			this.$store.hosts.commit("removeHost", e);
+			this.$store.commit("removeHost", e);
 		},
 	},
 };
