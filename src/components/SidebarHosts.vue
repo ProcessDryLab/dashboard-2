@@ -1,16 +1,23 @@
 <template>
-	<b-sidebar id="sidebar-1" title="Hosts configuration" shadow backdrop>
+	<b-sidebar id="sidebar-1" width="500px" title="Hosts configuration" shadow backdrop>
 		<div class="px-3 py-2">
 			<h5 class="mb-3">Repositories</h5>
 			<b-list-group>
 				<b-list-group-item
 					v-for="item in this.$store.getters.getHostsRepository"
 					v-bind:key="item.name"
-					class="pl-3"
+					class="pl-2 pr-2"
 					:class="item.status"
+					style="
+						width: 100%;
+						font-size: 0.85em;
+						white-space: nowrap;
+						overflow: hidden !important;
+						text-overflow: ellipsis !important;
+					"
 				>
 					<b-icon icon="hdd-fill" />
-					<code class="text-dark ml-2">{{ item.name }}</code>
+					<code class="text-dark ml-2" :title="item.name">{{ item.name }}</code>
 					<b-button
 						variant="link"
 						class="float-right p-0 text-secondary"
@@ -29,6 +36,13 @@
 					v-bind:key="item.name"
 					class="pl-3"
 					:class="item.status"
+					style="
+						width: 100%;
+						font-size: 0.85em;
+						white-space: nowrap;
+						overflow: hidden !important;
+						text-overflow: ellipsis !important;
+					"
 				>
 					<b-icon icon="gear-fill" />
 					<code class="text-dark ml-2">{{ item.name }}</code>
