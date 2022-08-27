@@ -5,7 +5,7 @@ export default {
 	mutations: {
 		// synchronous
 		addOperation(state, payload) {
-			state.operations.push({
+			state.operations.unshift({
 				title: payload.description,
 				started: Date.now(),
 				completed: null,
