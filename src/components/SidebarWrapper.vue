@@ -1,5 +1,5 @@
 <template>
-	<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse px-0 border-right">
+	<nav class="col-md-4 col-lg-3 d-md-block bg-light sidebar collapse px-0 border-right">
 		<div class="sidebar-sticky px-0 mx-0">
 			<div style="height: calc(100vh - 86px)">
 				<div class="h-75 overflow-auto pb-1">
