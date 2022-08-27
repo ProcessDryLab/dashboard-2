@@ -10,4 +10,8 @@ export class RepositoryService {
 	static buildResourceListUrl(hostname) {
 		return hostname + "/api/v1/resources";
 	}
+
+	static deleteResource(hostname, id) {
+		return hostname + "/api/v1/resources/" + id;
+	}
 }
