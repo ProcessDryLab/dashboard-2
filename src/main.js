@@ -16,6 +16,9 @@ Vue.use(IconsPlugin);
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
+// moment
+Vue.use(require("vue-moment"));
+
 new Vue({
 	router,
 	store,

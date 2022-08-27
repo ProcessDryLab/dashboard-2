@@ -46,8 +46,14 @@ export default {
 				const payload = new FormData();
 				payload.append("upfile", this.file);
 				axios.post(RepositoryService.buildUploadUrl(this.repository), payload, config).then(() => {
-					this.$bvToast.toast('Upload of file "' + this.file.name + '" complete', {
-						title: "Upload",
+					this.$store.commit("addOperation", {
+						title: "Upload complete",
+						description: 'File "' + this.file.name + '" uploaded correctly',
+						host: this.repository,
+						type: "repository",
+					});
+					this.$bvToast.toast('File "' + this.file.name + '" uploaded correctly', {
+						title: "Upload complete",
 						variant: "success",
 						solid: true,
 					});
