@@ -1,5 +1,5 @@
 <template>
-	<b-sidebar id="sidebar-1" title="Hosts configuration" shadow backdrop visible>
+	<b-sidebar id="sidebar-1" title="Hosts configuration" shadow backdrop>
 		<div class="px-3 py-2">
 			<h5 class="mb-3">Repositories</h5>
 			<b-list-group>
