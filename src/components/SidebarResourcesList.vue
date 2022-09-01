@@ -26,7 +26,7 @@
 				<span :title="resource.name">{{ resource.name }}</span>
 
 				<b-button
-					variant="outline-secondary"
+					variant="text-secondary"
 					style="float: right; font-size: 0.85em"
 					class="m-0 py-0 px-1"
 					@click="deleteEntry({ id: resource.id, host: resource.host, name: resource.name })"

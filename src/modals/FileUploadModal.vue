@@ -42,6 +42,11 @@ export default {
 					variant: "danger",
 				});
 			} else {
+				this.$bvToast.toast('File "' + this.file.name + '" is being uploaded...', {
+					title: "Upload initiated",
+					variant: "info",
+					solid: true,
+				});
 				const config = { headers: { "Content-Type": "multipart/form-data" } };
 				const payload = new FormData();
 				payload.append("upfile", this.file);
