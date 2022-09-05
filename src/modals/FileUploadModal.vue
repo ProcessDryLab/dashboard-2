@@ -38,7 +38,6 @@ export default {
 	},
 	methods: {
 		prepare() {
-			console.log("prepared");
 			this.repositories = this.$store.getters.getHostsRepository.map((str) => ({
 				text: str.name,
 				value: str.name,
