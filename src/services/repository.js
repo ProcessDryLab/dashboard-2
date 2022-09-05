@@ -14,4 +14,8 @@ export class RepositoryService {
 	static deleteResource(hostname, id) {
 		return hostname + "/api/v1/resources/" + id;
 	}
+
+	static buildResourceVisualization(hostname, resourceId, visualizationId) {
+		return hostname + "/api/v1/resources/" + resourceId + "/view/" + visualizationId;
+	}
 }

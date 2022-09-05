@@ -8,7 +8,6 @@
 		</p>
 		<b-list-group flush class="border-top border-bottom" v-if="this.$store.getters.getWorkspace.length > 0">
 			<b-list-group-item
-				href="#"
 				v-for="resource in this.$store.getters.getWorkspace"
 				v-bind:key="resource.id"
 				class="pl-2 pr-2"
@@ -19,6 +18,7 @@
 					overflow: hidden !important;
 					text-overflow: ellipsis !important;
 				"
+				:to="{ name: 'ContentVisualizer', params: { id: resource.id } }"
 			>
 				<b-badge variant="light" class="text-uppercase border border-secondary mr-1">
 					{{ resource.type.name }}

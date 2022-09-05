@@ -5,8 +5,19 @@ import { RepositoryService } from "../../services/repository";
 export default {
 	state: {
 		workspace: [
-			{ id: "aaaa1", name: "f1", type: "t1", host: "" },
-			{ id: "aaaa2", name: "f2", type: "t2", host: "" },
+			{
+				id: "id1",
+				name: "resource1",
+				type: {
+					name: "xes",
+					description: "A file with extension .xes",
+					visualizations: [
+						{ id: "v1", name: "Vis 1" },
+						{ id: "v2", name: "Vis 2" },
+					],
+				},
+				host: "",
+			},
 		],
 	},
 	mutations: {
@@ -45,5 +56,6 @@ export default {
 	modules: {},
 	getters: {
 		getWorkspace: (state) => state.workspace,
+		getResource: (state) => (id) => state.workspace.filter((r) => r.id === id),
 	},
 };
