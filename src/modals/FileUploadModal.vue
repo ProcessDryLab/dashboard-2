@@ -1,7 +1,6 @@
 <template>
 	<b-modal centered id="new-file-modal" title="Upload file" @ok="handleOk">
 		<form ref="form" @submit.stop.prevent="handleSubmit">
-			<!-- <ValidatedInputText label="File:" error="Upload a file" type="file" v-model="file" /> -->
 			<b-form-group label="File to upload:">
 				<b-form-file
 					v-model="file"
@@ -29,11 +28,23 @@ export default {
 		repository: "",
 		repositories: [],
 	}),
+	watch: {
+		"$store.getters.getHostsRepository": function () {
+			this.prepare();
+		},
+	},
 	mounted() {
-		this.repositories = this.$store.getters.getHostsRepository.map((str) => ({ text: str.name, value: str.name }));
-		this.repository = this.repositories[0].value;
+		this.prepare();
 	},
 	methods: {
+		prepare() {
+			console.log("prepared");
+			this.repositories = this.$store.getters.getHostsRepository.map((str) => ({
+				text: str.name,
+				value: str.name,
+			}));
+			this.repository = this.repositories[0].value;
+		},
 		handleSubmit() {
 			if (this.file === null) {
 				this.$bvToast.toast("No file specified", {

@@ -48,7 +48,7 @@
 					<code class="text-dark ml-2">{{ item.name }}</code>
 					<b-button
 						variant="link"
-						class="float-right p-0 text-secondary"
+						class="float-right py-0 px-1 text-secondary"
 						style="font-size: 0.75em"
 						@click="deleteEntry({ type: 'miner', name: item.name })"
 					>
