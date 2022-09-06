@@ -11,19 +11,15 @@ jobs:
             - name: Setup Node.js for use with actions
               uses: actions/setup-node@v1
               with:
-                  version: 12.x
+                  node-version: 12.x
 
             - name: Checkout branch
               uses: actions/checkout@v1
 
-            - name: Run deploy script
-              run: |
-                  git config user.name "delas" && git config user.email "andrea.burattin@gmail.com"
-                  npm run gh-pages-build
+            - name: Install and Build 🔧
+              run: npm run gh-pages-build
 
-            - name: Deploy To gh-pages branch
-              uses: peaceiris/actions-gh-pages@v3
+            - name: Deploy 🚀
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_branch: gh-pages
-                  publish_dir: ./dist
+                  folder: build
