@@ -5,10 +5,24 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Vue
     steps:
-    - uses: actions/checkout@v2
-    - id: Build-Vue
-      uses: xRealNeon/VuePagesAction@1.0.1
+    - name: Checking out the project
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js for use with actions
+      uses: actions/setup-node@v3
       with:
-        username: 'ProcessDryLab'
-        reponame: 'dashboard-2'
-        token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+        node-version: 16
+    
+    - name: Clean install dependencies
+      run: npm ci
+      
+    - name: Build Vue
+      run: |
+        npm build
+        cd dist
+        git config user.name "delas" && git config user.email "andrea.burattin@gmail.com"
+        git init
+        git add -A
+        git commit -m 'New deployment'
+        git push -f https://delas:@github.com/ProcessDryLab/dashboard-2.git master:gh-pages
+      shell: bash
