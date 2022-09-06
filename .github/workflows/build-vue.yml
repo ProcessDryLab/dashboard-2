@@ -1,28 +1,24 @@
-name: Build Vue
-on: [push]
+name: Deploy to github pages
+on:
+    push:
+        branches:
+            - master
 jobs:
-  build_vue:
-    runs-on: ubuntu-latest
-    name: Build Vue
-    steps:
-    - name: Checking out the project
-      uses: actions/checkout@v3
-      
-    - name: Setup Node.js for use with actions
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    
-    - name: Clean install dependencies
-      run: npm install
-      
-    - name: Build Vue
-      run: |
-        npm build
-        cd dist
-        git config user.name "delas" && git config user.email "andrea.burattin@gmail.com"
-        git init
-        git add -A
-        git commit -m 'New deployment'
-        git push -f https://delas:@github.com/ProcessDryLab/dashboard-2.git master:gh-pages
-      shell: bash
+    gh-pages-deploy:
+        name: Deploying to gh-pages
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup Node.js for use with actions
+              uses: actions/setup-node@v3
+              with:
+                  version: 12.x
+            - name: Checkout branch
+              uses: actions/checkout@v3
+
+            - name: Clean install dependencies
+              run: npm ci
+
+            - name: Run deploy script
+              run: |
+                  git config user.name "delas" && git config user.email "andrea.burattin@gmail.com"
+                  npm run gh-pages-deploy
