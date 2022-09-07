@@ -1,11 +1,11 @@
-name: Deploy to github pages
+name: Application build and deployment
 on:
     push:
         branches:
             - master
 jobs:
     build:
-        name: Deploying to gh-pages
+        name: Application build
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
@@ -22,6 +22,11 @@ jobs:
                   path: ./dist
 
     deploy:
+        name: Deploy to GitHub Pages
+        needs: build
+        permissions:
+            pages: write
+            id-token: write
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
