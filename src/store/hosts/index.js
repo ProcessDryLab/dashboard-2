@@ -5,10 +5,7 @@ import { RepositoryService } from "../../services/repository";
 export default {
 	state: {
 		hosts: [
-			{ name: "http://pdl-repository-eu1.herokuapp.com", status: "loading", type: "repository" },
-			{ name: "http://pdl-repository-eu2.herokuapp.com", status: "loading", type: "repository" },
-			// { name: "http://miner.test1.com", status: "online", type: "miner" },
-			// { name: "http://miner.test2.com", status: "online", type: "miner" },
+			{ name: "https://pdl-repository-eu1.azurewebsites.net", status: "loading", type: "repository" },
 		],
 	},
 	mutations: {
