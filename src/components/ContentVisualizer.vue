@@ -9,7 +9,13 @@
 					loading="lazy"
 					width="100%"
 					frameborder="0"
+					v-if="vis.type == 'html'"
 				></iframe>
+				<ProcessRenderer
+					class="h-100"
+					v-if="vis.type == 'graphviz'"
+					:dotUrl="buildUrl(resource.host, resource.id, vis.id)"
+				/>
 			</b-tab>
 		</b-tabs>
 	</b-col>
@@ -17,6 +23,7 @@
 
 <script>
 import { RepositoryService } from "../services/repository";
+import ProcessRenderer from "../widgets/ProcessRenderer.vue";
 
 export default {
 	name: "Contentvisualizer",
@@ -40,16 +47,18 @@ export default {
 			return RepositoryService.buildResourceVisualization(host, resourceId, visualizationId);
 		},
 		updateId() {
+			// this.resource.type.type.visualizations.
 			if ("id" in this.$route.params) {
 				var results = this.$store.getters.getResource(this.$route.params.id);
 				if (results.length == 1) {
-					this.resource = results[0];
+					this.$set(this, "resource", results[0]);
 					return;
 				}
 			}
 			this.$router.push("/");
 		},
 	},
+	components: { ProcessRenderer },
 };
 </script>
 
