@@ -10,8 +10,9 @@
 	"dependencies": {
 		"axios": "^0.27.2",
 		"bootstrap-vue": "2.22.0",
-		"core-js": "^3.25.0",
+		"core-js": "^3.25.2",
 		"execa": "^6.1.0",
+		"file-loader": "^6.2.0",
 		"moment": "^2.29.4",
 		"viz.js": "^2.1.2",
 		"vue": "^2.7.10",
@@ -22,29 +23,13 @@
 		"vuex": "^3.4.0"
 	},
 	"devDependencies": {
-		"@vue/cli-plugin-babel": "~4.5.8",
-		"@vue/cli-plugin-eslint": "~4.5.8",
-		"@vue/cli-plugin-router": "~4.5.8",
-		"@vue/cli-plugin-vuex": "~4.5.8",
-		"@vue/cli-service": "~4.5.8",
-		"babel-eslint": "^10.1.0",
-		"eslint": "^6.7.2",
-		"eslint-plugin-vue": "^6.2.2",
+		"@vue/cli-plugin-babel": "^5.0.8",
+		"@vue/cli-plugin-router": "^5.0.8",
+		"@vue/cli-plugin-vuex": "^5.0.8",
+		"@vue/cli-service": "^5.0.8",
+		"eslint": "^8.23.1",
+		"eslint-plugin-vue": "^9.5.1",
 		"vue-template-compiler": "^2.6.11"
-	},
-	"eslintConfig": {
-		"root": true,
-		"env": {
-			"node": true
-		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
-		"parserOptions": {
-			"parser": "babel-eslint"
-		},
-		"rules": {}
 	},
 	"browserslist": [
 		"> 1%",
