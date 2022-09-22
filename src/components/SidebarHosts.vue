@@ -34,7 +34,7 @@
 				<b-list-group-item
 					v-for="item in this.$store.getters.getHostsMiner"
 					v-bind:key="item.name"
-					class="pl-3"
+					class="pl-2 pr-2"
 					:class="item.status"
 					style="
 						width: 100%;
@@ -45,10 +45,10 @@
 					"
 				>
 					<b-icon icon="gear-fill" />
-					<code class="text-dark ml-2">{{ item.name }}</code>
+					<code class="text-dark ml-2" :title="item.name">{{ item.name }}</code>
 					<b-button
 						variant="link"
-						class="float-right py-0 px-1 text-secondary"
+						class="float-right p-0 text-secondary"
 						style="font-size: 0.75em"
 						@click="deleteEntry({ type: 'miner', name: item.name })"
 					>
