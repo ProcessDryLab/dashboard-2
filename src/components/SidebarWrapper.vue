@@ -15,6 +15,7 @@
 						<b-button
 							variant="outline-secondary"
 							class="mt-1 mx-2"
+							v-b-modal.new-mining-modal
 							:disabled="this.$store.getters.getSystemStatus != 'online'"
 						>
 							<b-icon icon="gear-wide-connected" /> New mining instance
@@ -29,6 +30,7 @@
 			<SidebarStatusSummary />
 		</div>
 		<FileUploadModal />
+		<NewMinerInstance />
 	</nav>
 </template>
 
@@ -37,6 +39,7 @@ import SidebarResourcesList from "./SidebarResourcesList.vue";
 import SidebarOperationsList from "./SidebarOperationsList.vue";
 import SidebarStatusSummary from "./SidebarStatusSummary.vue";
 import FileUploadModal from "../modals/FileUploadModal.vue";
+import NewMinerInstance from "../modals/NewMinerInstance.vue";
 
 export default {
 	name: "SidebarWrapper",
@@ -45,6 +48,7 @@ export default {
 		SidebarOperationsList,
 		SidebarStatusSummary,
 		FileUploadModal,
+		NewMinerInstance,
 	},
 };
 </script>

@@ -60,6 +60,6 @@ export default {
 	},
 	modules: {},
 	getters: {
-		getMiners: (state) => state.workspace,
+		getMiners: (state) => state.miners,
 	},
 };
