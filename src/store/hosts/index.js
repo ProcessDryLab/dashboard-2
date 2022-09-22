@@ -5,7 +5,8 @@ import { RepositoryService } from "../../services/repository";
 export default {
 	state: {
 		hosts: [
-			{ name: "https://pdl-repository-eu1.azurewebsites.net", status: "loading", type: "repository" },
+			{ name: "http://pdl-repository-eu1.azurewebsites.net", status: "loading", type: "repository" },
+			{ name: "http://localhost:8080", status: "loading", type: "miner" },
 		],
 	},
 	mutations: {
