@@ -57,5 +57,6 @@ export default {
 	getters: {
 		getWorkspace: (state) => state.workspace,
 		getResource: (state) => (id) => state.workspace.filter((r) => r.id === id),
+		getResourcesByType: (state) => (typeName) => state.workspace.filter((r) => r.type.name === typeName),
 	},
 };
