@@ -43,7 +43,17 @@
 					<em>The miner selected does not require any input.</em>
 				</p>
 				<div v-else>
-					<p>Select the parameters</p>
+					<p>Configure the parameters:</p>
+					<b-form-group
+						v-bind:key="p.name"
+						v-for="p in miner.parameters"
+						:label="p.name + ' (' + p.type.toLowerCase() + '):'"
+					>
+						<b-form-input
+							:type="p.type.toLowerCase() == 'string' ? 'text' : 'number'"
+							v-model="parameters[p.name]"
+						></b-form-input>
+					</b-form-group>
 				</div>
 			</div>
 			<div v-if="wizardStep == 4">
@@ -86,16 +96,17 @@ export default {
 				parameters: [],
 			},
 			inputs: {},
+			parameters: {},
 			repository: "",
 		};
 	},
-	watch: {
+	/*watch: {
 		wizardStep(newValue, oldValue) {
 			if (oldValue > newValue && newValue == 1) {
 				// this.inputs = {};
 			}
 		},
-	},
+	},*/
 	computed: {
 		repositories() {
 			return this.$store.getters.getHostsRepository.map((str) => ({
