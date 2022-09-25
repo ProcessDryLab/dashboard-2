@@ -8,10 +8,7 @@
 			v-bind:key="m.id"
 			v-for="m in this.$store.getters.getMiners"
 			@click="
-				miner.id = m.id;
-				miner.name = m.name;
-				miner.host = m.host;
-				miner.input = m.input;
+				miner = m;
 				$emit('selected', miner);
 			"
 			style="font-size: 0.85em"
@@ -30,12 +27,7 @@ export default {
 	props: ["current"],
 	data() {
 		return {
-			miner: {
-				id: "",
-				name: "",
-				host: "",
-				input: "",
-			},
+			miner: {},
 		};
 	},
 	mounted() {

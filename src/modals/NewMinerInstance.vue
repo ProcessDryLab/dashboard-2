@@ -30,15 +30,24 @@
 				<div v-else>
 					<p>Configure the input for the mining algorithm:</p>
 					<b-form-group class="mt-3" :label="name" v-bind:key="name" v-for="(obj, name) in miner.input">
-						<ResourceDropdown :type="obj.name" />
+						<ResourceDropdown
+							:current="inputs[name]"
+							:type="obj.name"
+							@selected="(m) => (inputs[name] = m)"
+						/>
 					</b-form-group>
 				</div>
 			</div>
 			<div v-if="wizardStep == 3">
-				<h6>Select Parameters</h6>
+				<p v-if="Object.keys(miner.parameters).length == 0">
+					<em>The miner selected does not require any input.</em>
+				</p>
+				<div v-else>
+					<p>Select the parameters</p>
+				</div>
 			</div>
 			<div v-if="wizardStep == 4">
-				<b-form-group label="Select Destination Repository">
+				<b-form-group label="Select the destination repository">
 					<b-form-select v-model="repository" :options="repositories" required></b-form-select>
 				</b-form-group>
 			</div>
@@ -74,9 +83,18 @@ export default {
 				name: "",
 				host: "",
 				input: {},
+				parameters: [],
 			},
+			inputs: {},
 			repository: "",
 		};
+	},
+	watch: {
+		wizardStep(newValue, oldValue) {
+			if (oldValue > newValue && newValue == 1) {
+				// this.inputs = {};
+			}
+		},
 	},
 	computed: {
 		repositories() {
