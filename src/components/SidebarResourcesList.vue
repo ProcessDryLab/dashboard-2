@@ -24,42 +24,13 @@
 					{{ resource.type.name }}
 				</b-badge>
 				<span :title="resource.name">{{ resource.name }}</span>
-
-				<b-button
-					variant="text-secondary"
-					style="float: right; font-size: 0.85em"
-					class="m-0 py-0 px-1"
-					@click="deleteEntry({ id: resource.id, host: resource.host, name: resource.name })"
-				>
-					<b-icon icon="trash" />
-				</b-button>
 			</b-list-group-item>
 		</b-list-group>
 	</div>
 </template>
 
 <script>
-import { RepositoryService } from "../services/repository";
-import axios from "axios";
-
 export default {
 	name: "SidebarResourcesList",
-	methods: {
-		deleteEntry(e) {
-			axios.delete(RepositoryService.deleteResource(e.host, e.id)).then(() => {
-				this.$bvToast.toast('File "' + e.name + '" deleted correctly', {
-					title: "Deletion complete",
-					variant: "success",
-					solid: true,
-				});
-				this.$store.commit("addOperation", {
-					title: "Deletion complete",
-					description: 'File "' + e.name + '" deleted correctly',
-					host: e.host,
-					type: "repository",
-				});
-			});
-		},
-	},
 };
 </script>
