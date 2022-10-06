@@ -70,7 +70,7 @@
 				<b-button variant="primary" class="float-right" v-if="wizardStep < 4" @click="wizardStep++">
 					Next
 				</b-button>
-				<b-button variant="primary" class="float-right" v-if="wizardStep == 4" @click="wizardStep++">
+				<b-button variant="primary" class="float-right" v-if="wizardStep == 4" @click="handleSubmit">
 					Ok
 				</b-button>
 			</div>
@@ -79,8 +79,10 @@
 </template>
 
 <script>
+import { MinerService } from "../services/miner";
 import MinersDropdown from "../widgets/MinersDropdown.vue";
 import ResourceDropdown from "../widgets/ResourceDropdown.vue";
+import axios from "axios";
 
 export default {
 	name: "NewMinerInstance",
@@ -100,19 +102,39 @@ export default {
 			repository: "",
 		};
 	},
-	/*watch: {
-		wizardStep(newValue, oldValue) {
-			if (oldValue > newValue && newValue == 1) {
-				// this.inputs = {};
-			}
-		},
-	},*/
 	computed: {
 		repositories() {
 			return this.$store.getters.getHostsRepository.map((str) => ({
 				text: str.name,
 				value: str.name,
 			}));
+		},
+	},
+	methods: {
+		handleSubmit() {
+			var configuration = {
+				miner: this.miner,
+				inputs: this.inputs,
+				parameters: [],
+				repository: this.repository,
+			};
+			for (const param in this.parameters) {
+				configuration.parameters.push({ name: param, value: this.parameters[param] });
+			}
+			axios.post(MinerService.buildNewMinerInstanceUrl(this.miner.host), configuration).then(() => {
+				/*this.$store.commit("addOperation", {
+						title: "Upload complete",
+						description: 'File "' + this.file.name + '" uploaded correctly',
+						host: this.repository,
+						type: "repository",
+					});
+					/*this.$bvToast.toast('File "' + this.file.name + '" uploaded correctly', {
+						title: "Upload complete",
+						variant: "success",
+						solid: true,
+					});*/
+				console.log("done");
+			});
 		},
 	},
 };

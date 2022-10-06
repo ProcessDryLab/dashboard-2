@@ -6,4 +6,8 @@ export class MinerService {
 	static buildMinersListUrl(hostname) {
 		return hostname + "/api/v1/miners";
 	}
+
+	static buildNewMinerInstanceUrl(hostname) {
+		return hostname + "/api/v1/miners/instance";
+	}
 }
