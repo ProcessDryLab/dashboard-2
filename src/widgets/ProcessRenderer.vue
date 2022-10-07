@@ -3,7 +3,7 @@
 		class="border"
 		:class="{ loading: this.svg === null }"
 		:zoomEnabled="true"
-		:controlIconsEnabled="true"
+		:controlIconsEnabled="false"
 		:fit="false"
 		:center="true"
 		@svgpanzoom="registerSvgPanZoom"
@@ -53,9 +53,7 @@ export default {
 				var viz = new Viz({ workerURL });
 				viz.renderSVGElement(this.dot)
 					.then((element) => {
-						this.viewBox = element.getAttribute("viewBox").split(" ").map(Math.ceil);
-						let innerHTML = element.getElementsByClassName("graph")[0].innerHTML;
-						this.svg = innerHTML;
+						this.svg = element.innerHTML;
 					})
 					.catch((error) => console.error(error));
 			}
@@ -63,12 +61,6 @@ export default {
 		registerSvgPanZoom(svgpanzoom) {
 			this.svgpanzoom = svgpanzoom;
 		},
-		/*center() {
-			console.log("c?");
-			if (!this.svgpanzoom) return;
-			console.log("centered");
-			this.svgpanzoom.center();
-		},*/
 	},
 };
 </script>
@@ -76,8 +68,5 @@ export default {
 <style scoped>
 .loading {
 	background: url("../assets/loader.svg") center center no-repeat !important;
-}
-#svg-pan-zoom-control {
-	transform: translate(0, 0) scale(0.75, 0.75) !important;
 }
 </style>
