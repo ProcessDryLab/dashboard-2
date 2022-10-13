@@ -1,6 +1,7 @@
 <template>
 	<b-navbar toggleable="lg" type="dark" class="shadow fixed-top" style="background-color: #900 !important">
 		<b-navbar-brand href="#">
+			<img src="@/assets/logo.svg" class="d-inline-block align-top" alt="DTU" height="30" />
 			<img src="@/assets/dtu.png" class="d-inline-block align-top" alt="DTU" height="30" />
 			PDL - ProcessDryLab
 		</b-navbar-brand>
