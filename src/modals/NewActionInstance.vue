@@ -70,9 +70,19 @@
 				<b-button variant="primary" class="float-right" v-if="wizardStep < 4" @click="wizardStep++">
 					Next
 				</b-button>
-				<b-button variant="primary" class="float-right" v-if="wizardStep == 4" @click="handleSubmit">
+				<!-- <b-button variant="primary"  class="float-right" v-if="wizardStep == 4" @click="handleSubmit">
 					Confirm and close
-				</b-button>
+				</b-button> -->
+				<b-dropdown
+					split
+					variant="primary"
+					class="float-right"
+					v-if="wizardStep == 4"
+					text="Confirm and close"
+					@click="handleSubmitAndClose"
+				>
+					<b-dropdown-item @click="handleSubmit">Confirm and keep open</b-dropdown-item>
+				</b-dropdown>
 			</div>
 		</template>
 	</b-modal>
@@ -135,6 +145,10 @@ export default {
 					solid: true,
 				});
 			});
+		},
+		handleSubmitAndClose() {
+			this.handleSubmit();
+			this.$bvModal.hide("new-mining-modal");
 		},
 		reset() {
 			this.wizardStep = 1;
