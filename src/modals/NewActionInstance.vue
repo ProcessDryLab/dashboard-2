@@ -1,5 +1,5 @@
 <template>
-	<b-modal centered id="new-mining-modal" title="New Mining Instance">
+	<b-modal centered id="new-mining-modal" title="New Action Instance">
 		<table class="table table-borderless text-center" style="font-size: 0.85rem">
 			<tr>
 				<td class="text-nowrap rounded" :class="wizardStep == 1 ? 'bg-warning' : 'text-muted'">1. Miner</td>
@@ -15,17 +15,17 @@
 		<hr />
 		<form ref="form" @submit.stop.prevent="">
 			<div v-if="wizardStep == 1">
-				<p>Select the mining algorithm to use:</p>
+				<p>Select the action to use:</p>
 				<b-form-group class="mt-3">
-					<MinersDropdown :current="this.miner" @selected="(m) => (this.miner = m)" />
+					<ActionsDropdown :current="this.miner" @selected="(m) => (this.miner = m)" />
 					<b-form-invalid-feedback :state="miner.id !== ''">
-						A miner has to be selected
+						An action has to be selected
 					</b-form-invalid-feedback>
 				</b-form-group>
 			</div>
 			<div v-if="wizardStep == 2">
 				<p v-if="Object.keys(miner.input).length == 0">
-					<em>The miner selected does not require any input.</em>
+					<em>The selected action does not require any input.</em>
 				</p>
 				<div v-else>
 					<p>Configure the input for the mining algorithm:</p>
@@ -40,7 +40,7 @@
 			</div>
 			<div v-if="wizardStep == 3">
 				<p v-if="Object.keys(miner.parameters).length == 0">
-					<em>The miner selected does not require any input.</em>
+					<em>The selected action does not require any input.</em>
 				</p>
 				<div v-else>
 					<p>Configure the parameters:</p>
@@ -71,7 +71,7 @@
 					Next
 				</b-button>
 				<b-button variant="primary" class="float-right" v-if="wizardStep == 4" @click="handleSubmit">
-					Ok
+					Confirm and close
 				</b-button>
 			</div>
 		</template>
@@ -80,13 +80,13 @@
 
 <script>
 import { MinerService } from "../services/miner";
-import MinersDropdown from "../widgets/MinersDropdown.vue";
+import ActionsDropdown from "../widgets/ActionsDropdown.vue";
 import ResourceDropdown from "../widgets/ResourceDropdown.vue";
 import axios from "axios";
 
 export default {
-	name: "NewMinerInstance",
-	components: { MinersDropdown, ResourceDropdown },
+	name: "NewActionInstance",
+	components: { ActionsDropdown, ResourceDropdown },
 	data() {
 		return {
 			wizardStep: 1,
@@ -104,10 +104,12 @@ export default {
 	},
 	computed: {
 		repositories() {
-			return this.$store.getters.getHostsRepository.map((str) => ({
+			var m = this.$store.getters.getHostsRepository.map((str) => ({
 				text: str.name,
 				value: str.name,
 			}));
+			this.repository = m[0].value;
+			return m;
 		},
 	},
 	methods: {
@@ -121,21 +123,27 @@ export default {
 			for (const param in this.parameters) {
 				configuration.parameters.push({ name: param, value: this.parameters[param] });
 			}
+			this.$bvToast.toast("Action started...", {
+				title: "Action started",
+				variant: "info",
+				solid: true,
+			});
 			axios.post(MinerService.buildNewMinerInstanceUrl(this.miner.host), configuration).then(() => {
-				/*this.$store.commit("addOperation", {
-						title: "Upload complete",
-						description: 'File "' + this.file.name + '" uploaded correctly',
-						host: this.repository,
-						type: "repository",
-					});
-					/*this.$bvToast.toast('File "' + this.file.name + '" uploaded correctly', {
-						title: "Upload complete",
-						variant: "success",
-						solid: true,
-					});*/
-				console.log("done");
+				this.$bvToast.toast("Action completed correctly", {
+					title: "Action complete",
+					variant: "success",
+					solid: true,
+				});
 			});
 		},
+		reset() {
+			this.wizardStep = 1;
+		},
+	},
+	mounted() {
+		this.$root.$on("bv::modal::show", () => {
+			this.reset();
+		});
 	},
 };
 </script>

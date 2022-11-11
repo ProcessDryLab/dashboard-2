@@ -1,6 +1,6 @@
 <template>
 	<b-dropdown
-		:text="this.miner.name == '' ? 'Select miner' : 'Selected miner: ' + this.miner.name"
+		:text="this.miner.name == '' ? 'Select action' : 'Action selected: ' + this.miner.name"
 		block
 		variant="outline-secondary"
 	>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-	name: "MinersDropdown",
+	name: "ActionsDropdown",
 	props: ["current"],
 	data() {
 		return {

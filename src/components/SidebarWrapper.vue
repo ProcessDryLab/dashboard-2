@@ -24,31 +24,31 @@
 					<SidebarResourcesList />
 				</div>
 				<div class="h-25 overflow-auto border-top">
-					<SidebarOperationsList />
+					<SidebarActionsList />
 				</div>
 			</div>
 			<SidebarStatusSummary />
 		</div>
 		<FileUploadModal />
-		<NewMinerInstance />
+		<NewActionInstance />
 	</nav>
 </template>
 
 <script>
 import SidebarResourcesList from "./SidebarResourcesList.vue";
-import SidebarOperationsList from "./SidebarOperationsList.vue";
+import SidebarActionsList from "./SidebarActionsList.vue";
 import SidebarStatusSummary from "./SidebarStatusSummary.vue";
 import FileUploadModal from "../modals/FileUploadModal.vue";
-import NewMinerInstance from "../modals/NewMinerInstance.vue";
+import NewActionInstance from "../modals/NewActionInstance.vue";
 
 export default {
 	name: "SidebarWrapper",
 	components: {
 		SidebarResourcesList,
-		SidebarOperationsList,
+		SidebarActionsList,
 		SidebarStatusSummary,
 		FileUploadModal,
-		NewMinerInstance,
+		NewActionInstance,
 	},
 };
 </script>
