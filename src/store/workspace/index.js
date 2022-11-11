@@ -17,6 +17,7 @@ export default {
 					],
 				},
 				host: "",
+				creationDate: null,
 			},
 		],
 	},

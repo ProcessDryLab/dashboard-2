@@ -23,6 +23,13 @@
 				<b-badge variant="light" class="text-uppercase border border-secondary mr-1">
 					{{ resource.type.name }}
 				</b-badge>
+				<b-badge
+					variant="success"
+					class="text-uppercase border border-success mr-1 float-right"
+					v-if="(new Date() - new Date(resource.creationDate)) / 1000 < 15"
+				>
+					new
+				</b-badge>
 				<span :title="resource.name">{{ resource.name }}</span>
 			</b-list-group-item>
 		</b-list-group>
