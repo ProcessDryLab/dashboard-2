@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-3 text-muted">
-			Operations instances
+			Performed Actions
 		</h6>
 		<p class="text-muted text-center pt-3" v-if="this.$store.getters.getOperations.length == 0">
-			<em>No operations to report</em>
+			<em>No actions to report</em>
 		</p>
 		<ul class="list-unstyled operations-list">
 			<b-media

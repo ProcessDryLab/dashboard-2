@@ -18,7 +18,7 @@
 							v-b-modal.new-mining-modal
 							:disabled="this.$store.getters.getSystemStatus != 'online'"
 						>
-							<b-icon icon="gear-wide-connected" /> New mining instance
+							<b-icon icon="gear-wide-connected" /> Execute action
 						</b-button>
 					</b-nav>
 					<SidebarResourcesList />
